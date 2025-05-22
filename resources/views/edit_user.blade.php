@@ -20,14 +20,8 @@
             <a href="{{ route('user.index') }}" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
                 <i data-feather="user-check" class="w-5 h-5"></i><span>Data User</span>
             </a>
-            <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
+            <a href="{{ route('kajur.index') }}" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
                 <i data-feather="user" class="w-5 h-5"></i><span>Data Kajur</span>
-            </a>
-            <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
-                <i data-feather="users" class="w-5 h-5"></i><span>Data Mahasiswa</span>
-            </a>
-            <a href="#" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
-                <i data-feather="calendar" class="w-5 h-5"></i><span>Data Cuti</span>
             </a>
         </nav>
     </aside>
