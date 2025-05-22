@@ -1,61 +1,160 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Cara Membuat Project Frontend Laravel dengan Laragon QuickApp
 
-## About Laravel
+## Prasyarat
+- Laragon sudah terinstall
+- Git sudah terinstall
+- Composer sudah terinstall
+- Backend(CodeIgniter) dan database sudah tersedia
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Langkah 1: Clone Repository Backend CodeIgniter
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Buka terminal (cmd, Git Bash, atau terminal di VS Code).
+2. Arahkan ke folder Laragon `www` (biasanya `C:\laragon\www`):
+   ```bash
+   cd C:\laragon\www
+   ```
+3. Clone repository backend:
+   ```bash
+   git clone https://github.com/Alledanaralle/PBF.git backend
+   ```
+4. Masuk ke folder backend hasil clone:
+   ```bash
+   cd backend
+   ```
+5. Jika menggunakan Composer (CI4), jalankan:
+   ```bash
+   composer install
+   ```
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Langkah 2: Konfigurasi Database dan Koneksi Frontend ke Backend
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 3.1. Database
+1. Download database dari repository berikut `https://github.com/andinardelinaa/Database_PengajuanCuti.git`.
+2. Buka phpMyAdmin melalui Laragon.
+3. Buat database baru dengan nama `cuti`.
+4. Import database yang sudah didownload.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+### 3.2. Koneksi API Backend (CI)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Sebelum frontend Laravel mengakses backend, pastikan API dari backend CodeIgniter berjalan dengan baik. Untuk itu, lakukan pengujian menggunakan Postman:
 
-### Premium Partners
+1. Jalankan backend CodeIgniter:
+   ```bash
+   php spark serve
+   ```
+2. Buat request baru di aplikasi Postman, contoh:
+   ```
+   GET http://localhost:8080/api/users
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Langkah 4: Membuat Project Laravel Frontend
 
-## Code of Conduct
+### 4.1 Membuat Laravel dengan Laragon Quick App
+1. Buka Laragon.
+2. Klik kanan kemudian klik menu **Quick app** > pilih **Laravel**.
+3. Masukkan nama project frontend, contoh `frontend`.
+4. Klik **Create** dan tunggu proses pembuatan project selesai.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 4.2 Membuat Tampilan
+1. **Salin & edit file `.env`**  
+   Salin file `.env.example` menjadi `.env`
+   ```bash
+   cp .env.example .env
+   ```
+   Ubah nilai SESSION_DRIVER menjadi:
+   ```
+   SESSION_DRIVER=file
+   ```
+2. Buat controller user
+   ```
+   php artisan make:controller UserController
+   ```
+   Edit `app/Http/Controllers/UserController.php` seperti ini:
+   ```
+   <?php
+    namespace App\Http\Controllers;
 
-## Security Vulnerabilities
+    use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Http;
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    class UserController extends Controller
+    {
+        // Tampilkan data user dari API
+        public function index()
+        {
+            $response = Http::get('http://localhost:8080/user');
 
-## License
+            if ($response->successful()) {
+                $user = $response->json();
+                return view('tampil_user', ['user' => $user]);
+            }
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+            return back()->with('error', 'Gagal mengambil data user dari API');
+        }
+    }
+    ?>
+   ```
+2. Buat view user
+   ```
+   php artisan make:view tampil_user
+   ```
+   Edit `app/Http/Controllers/UserController.php`
+   ```
+   <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Daftar User</title>
+        @vite('resources/js/app.js')
+    </head>
+    <body class="bg-gray-100 text-gray-900">
+        <div class="max-w-4xl mx-auto py-10 px-4">
+            <h1 class="text-3xl font-bold mb-6">Daftar User</h1>
+
+            @if ($users && count($users) > 0)
+                <ul class="space-y-3">
+                    @foreach ($users as $user)
+                        <li class="p-4 bg-white shadow rounded">
+                            Nama: {{ $user['nama'] }}
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p>Tidak ada data user.</p>
+            @endif
+        </div>
+    </body>
+    </html>
+   ```
+3. Buka `routes/web.php` dan tambahkan menjadi:
+   ```
+   <?php
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\UserController;
+
+    Route::get('/', function () {
+        return view('homepage');
+    })->name('homepage');
+
+    Route::resource('user', UserController::class);
+   ```
+4. Jalankan Laravel
+   ```
+   composer instal
+   ```
+   Kemudian
+   ```
+   php artisan serve
+   ```
+---
+
+**Selamat mencoba! 🚀**

@@ -69,7 +69,7 @@
                             <td class="px-6 py-3">{{ $usr['username'] }}</td>
                             <td class="px-6 py-3">{{ $usr['level'] }}</td>
                             <td class="px-6 py-3 space-x-2">
-                                <a href="{{ route('user.edit',  $usr['id_user']) }}" class="text-blue-600 hover:underline flex items-center space-x-1 inline-flex">
+                                <a href="{{ url('/user/' . $usr['id_user'] . '/edit') }}" class="text-blue-600 hover:underline flex items-center space-x-1 inline-flex">
                                     <i data-feather="edit" class="w-4 h-4"></i><span>Edit</span>
                                 </a>
                                 <form action="{{ route('user.destroy', $usr['id_user']) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus user ini?')" class="inline">
