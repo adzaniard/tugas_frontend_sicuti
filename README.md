@@ -32,7 +32,8 @@
 ### 💾 2.1. Setup Database
 
 1. Download database dari: 
-    ```https://github.com/andinardelinaa/Database_PengajuanCuti.git
+    ```
+    https://github.com/andinardelinaa/Database_PengajuanCuti.git
     ```
 2. Buka phpMyAdmin melalui Laragon.
 3. Buat database baru bernama `cuti`.
