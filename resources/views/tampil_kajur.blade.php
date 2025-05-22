@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Data User</title>
+    <title>Data Kajur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -37,18 +37,18 @@
         <!-- Main Content -->
         <main class="flex-1 p-8">
             <div class="w-full flex justify-center mb-6">
-                <h1 class="text-4xl font-bold text-center">. : Data User : .</h1>
+                <h1 class="text-4xl font-bold text-center">. : Data Kajur : .</h1>
             </div>
 
             <div class="bg-white rounded-lg shadow p-6">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
                     <!-- Tombol Tambah -->
-                    <a href="{{ route('user.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center space-x-2">
-                        <i data-feather="plus" class="w-4 h-4"></i><span>Tambah User</span>
+                    <a href="{{ route('kajur.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center space-x-2">
+                        <i data-feather="plus" class="w-4 h-4"></i><span>Tambah Kajur</span>
                     </a>
 
                     <!-- Input Pencarian -->
-                    <input type="text" id="searchInput" placeholder="Cari user..." class="px-4 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-70">
+                    <input type="text" id="searchInput" placeholder="Cari kajur..." class="px-4 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 w-70">
                 </div>
                 <!-- Table -->
                 <div class="rounded-lg overflow-x-auto">
@@ -56,26 +56,28 @@
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="px-6 py-3">No.</th>
-                                <th class="px-6 py-3">ID User</th>
-                                <th class="px-6 py-3">Password</th>
+                                <th class="px-6 py-3">ID Kajur</th>
+                                <th class="px-6 py-3">Nama Kajur</th>
+                                <th class="px-6 py-3">NIDN</th>
+                                <th class="px-6 py-3">Nama Jurusan</th>
                                 <th class="px-6 py-3">Username</th>
-                                <th class="px-6 py-3">Level</th>
                                 <th class="px-6 py-3">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="userTable">
-                            @foreach ($user as $index => $usr)
+                        <tbody id="kajurTable">
+                            @foreach ($kajur as $index => $kjr)
                             <tr class="border-t hover:bg-blue-100 ">
                                 <td class="px-7 py-3">{{ $index + 1 }}</td>
-                                <td class="px-6 py-3">{{ $usr['id_user'] }}</td>
-                                <td class="px-6 py-3">{{ $usr['password'] }}</td>
-                                <td class="px-6 py-3">{{ $usr['username'] }}</td>
-                                <td class="px-6 py-3">{{ $usr['level'] }}</td>
+                                <td class="px-6 py-3">{{ $kjr['id_kajur'] }}</td>
+                                <td class="px-6 py-3">{{ $kjr['nama_kajur'] }}</td>
+                                <td class="px-6 py-3">{{ $kjr['nidn'] }}</td>
+                                <td class="px-6 py-3">{{ $kjr['nama_jurusan'] }}</td>
+                                <td class="px-6 py-3">{{ $kjr['username'] }}</td>
                                 <td class="px-6 py-3 space-x-2">
-                                    <a href="{{ url('/user/' . $usr['id_user'] . '/edit') }}" class="text-blue-600 hover:underline flex items-center space-x-1 inline-flex">
+                                    <a href="{{ url('/kajur/' . $kjr['id_kajur'] . '/edit') }}" class="text-blue-600 hover:underline flex items-center space-x-1 inline-flex">
                                         <i data-feather="edit" class="w-4 h-4"></i><span>Edit</span>
                                     </a>
-                                    <form action="{{ route('user.destroy', $usr['id_user']) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus user ini?')" class="inline">
+                                    <form action="{{ route('kajur.destroy', $kjr['id_kajur']) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kajur ini?')" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:underline flex items-center space-x-1">
@@ -97,7 +99,7 @@
 
         // Pencarian Live
         const searchInput = document.getElementById('searchInput');
-        const tableRows = document.querySelectorAll('#userTable tr');
+        const tableRows = document.querySelectorAll('#kajurTable tr');
 
         searchInput.addEventListener('input', function() {
             const keyword = this.value.toLowerCase();

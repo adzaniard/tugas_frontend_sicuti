@@ -50,13 +50,17 @@ class UserController extends Controller
     }
 
     public function edit($id_user)
-{
-    $response = Http::get("http://localhost:8080/user/{$id_user}");
+    {
+        // Ambil data user berdasarkan ID User
+        $response = Http::get("http://localhost:8080/user/{$id_user}");
 
-    // Tambahkan debug sementara
-    dd($response->status(), $response->json());
-}
-
+        // Cek apakah kedua response berhasil
+        if ($response->successful()) {
+            $user = $response->json()[0];
+            return view('edit_user', compact('user'));
+        }
+        return redirect()->back()->withErrors(['msg' => 'Gagal mengambil data user']);
+    }
 
 
     // Update data user lewat API

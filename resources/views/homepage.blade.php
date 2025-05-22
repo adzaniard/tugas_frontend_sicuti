@@ -14,28 +14,23 @@
     <div class="flex min-h-screen">
 
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-md p-6 space-y-4">
-            <h2 class="text-2xl font-bold text-blue-600 mb-6">SiCuti</h2>
-            <nav class="space-y-4">
+        <aside class="w-64 bg-white shadow-md p-6 space-y-5">
+            <h2 class="text-4xl font-bold text-blue-600 text-center mx-auto">SiCuti</h2>
+            <nav class="space-y-4 ml-4">
                 <a href="{{ route('homepage') }}" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
-                    <i data-feather="home" class="w-5 h-5"></i>
-                    <span>Dashboard</span>
+                    <i data-feather="home" class="w-5 h-5"></i><span>Dashboard</span>
                 </a>
                 <a href="{{ route('user.index') }}" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
-                    <i data-feather="user-check" class="w-5 h-5"></i>
-                    <span>Data User</span>
+                    <i data-feather="user-check" class="w-5 h-5"></i><span>Data User</span>
+                </a>
+                <a href="{{ route('kajur.index') }}" class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
+                    <i data-feather="user" class="w-5 h-5"></i><span>Data Kajur</span>
                 </a>
                 <a href=".." class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
-                    <i data-feather="shield" class="w-5 h-5"></i>
-                    <span>Data Kajur</span>
+                    <i data-feather="users" class="w-5 h-5"></i><span>Data Mahasiswa</span>
                 </a>
                 <a href=".." class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
-                    <i data-feather="users" class="w-5 h-5"></i>
-                    <span>Data Mahasiswa</span>
-                </a>
-                <a href=".." class="flex items-center space-x-3 text-gray-700 hover:text-blue-600 font-medium">
-                    <i data-feather="calendar" class="w-5 h-5"></i>
-                    <span>Data Cuti</span>
+                    <i data-feather="calendar" class="w-5 h-5"></i><span>Data Cuti</span>
                 </a>
             </nav>
         </aside>
